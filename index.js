@@ -24,6 +24,9 @@ let playerHealth = 100;
 // Player Health Drop
 function takeDamage() {
   playerHealth = playerHealth - 20;
+  console.log(
+    `********************************\nSYSTEM: DAMAGE TAKEN\nSYSTEM: STRUCTURAL INTEGRITY AT ${playerHealth}%\n********************************`
+  );
 }
 // Combat Loop
 let inCombat = true;
@@ -35,9 +38,6 @@ function gameOver() {
     — Winston Churchill\n********************************\nGAME OVER`);
   } else {
     takeDamage();
-    console.log(
-      `********************************\nSYSTEM: DAMAGE TAKEN\nSYSTEM: STRUCTURAL INTEGRITY AT ${playerHealth}%\n********************************`
-    );
   }
 }
 
