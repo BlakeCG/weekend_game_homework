@@ -7,7 +7,7 @@ const enemyAircraft = [
   'Сухой Су-35,' /* health: 10 HP,role: Multi-Role,range: 2,796 mi,maxSpeed: 1,726 MPH" */,
   'Сухой Су-30,' /* health: "10 HP",role: "Multi-Role",range: "1,864 mi",maxSpeed: "1,317 MPH" */,
   'Туполев Ту-95,' /* health: "10 HP",role: "Multi-Role",range: "888 mi",maxSpeed: "1,491 MPH" */,
-  'Сухой Су-34,' /* health: "10 HP",role: "Multi-Role",range: "2,485 mi",maxSpeed: "1,367 MPH" */
+  'Сухой Су-34,' /* health: "10 HP",role: "Multi-Role",range: "2,485 mi",maxSpeed: "1,367 MPH" */,
 ];
 
 // Friendly Aircraft
@@ -15,8 +15,28 @@ const friendlyAircraft = [
   'F-16 Fighting Falcon,' /*  health: 10 HP, role: Multi-Role, range: 2,662 mi, maxSpeed: 1,500 MPH", */,
   'F-15 Eagle,' /* health: 10 HP, role: Multi-Role, range: 2,992 mi, maxSpeed: 1,875 MPH, */,
   'F-14 Tomcat,' /* health: 10 HP, role: Multi-Role, range: 1,841 mi, maxSpeed: 1,1544 MPH */,
-  'Saab JAS 39 Gripen,' /* health: 10 HP, role: Multi-Role, range: 2,019 mi, maxSpeed: 1,1534 MPH */
+  'Saab JAS 39 Gripen,' /* health: 10 HP, role: Multi-Role, range: 2,019 mi, maxSpeed: 1,1534 MPH */,
 ];
+
+// Player Health
+const playerHealth = 10;
+
+// Player Health Drop
+function takeDamage() {
+  playerHealth - 2;
+}
+// Combat Loop
+let inCombat = true;
+
+// GameOver
+function gameOver() {
+  if (playerHealth <= 0) {
+    console.log(`********************************\n"Success is not final, failure is not fatal: it is the courage to continue that counts."
+    — Winston Churchill\n********************************`);
+  } else {
+    takeDamage();
+  }
+}
 
 // Welcome Pilot
 console.log('********************************');
@@ -101,8 +121,8 @@ console.log(
   `********************************\nYOUR SQUADRON ARRIVES AT THE DESTINATION\nIt's a mess, Missiles and cannon fire are flying everywhere and planes are falling out of the sky.\nALARM: WARNING MISSLE LOCK\nMirage: ${pilotName} YOU GOT A BOGEY! EVADE!\n`
 );
 
-let gameOver = true;
-while (gameOver) {
+inCombat = true;
+while (inCombat) {
   console.log('********************************');
   console.log('SELECT MANUVER');
   let options = ['ROLL RIGHT', 'ROLL LEFT', 'LOOP'];
@@ -124,7 +144,7 @@ while (gameOver) {
       );
       break;
     case 2:
-      gameOver = false;
+      inCombat = false;
       console.log(
         `********************************\nYOU PERFORM A PERFECT LOOP. THE ENEMY ${enemyAircraft[0]} FLYS PAST YOU AND ARE NOW BEHIND IT!\nMirage : ALRIGHT! NOW STAY ON HIM AND FIRE AT WILL!\n********************************\n`
       );
@@ -138,8 +158,8 @@ console.log(
   `********************************\nTHE G FORCES RATTLE YOUR BRAIN BUT YOU MANAGE TO PULL IT OFF\nTHE ${enemyAircraft[0]} NOTICES YOU ARE NOW BEHIND HIM AND BEGINS EVASIVE MANUVERS\nMirage : KEEP ON HIM!\n********************************\n`
 );
 
-gameOver = true;
-while (gameOver) {
+inCombat = true;
+while (inCombat) {
   console.log('********************************');
   console.log('SELECT WEAPONS');
   options = ['FIRE VULCAN CANNON', 'FIRE MISSILE', 'STAY ON HIS TAIL'];
