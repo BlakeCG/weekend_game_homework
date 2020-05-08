@@ -19,11 +19,11 @@ const friendlyAircraft = [
 ];
 
 // Player Health
-const playerHealth = 10;
+let playerHealth = 100;
 
 // Player Health Drop
 function takeDamage() {
-  playerHealth - 2;
+  playerHealth = playerHealth - 20;
 }
 // Combat Loop
 let inCombat = true;
@@ -32,9 +32,12 @@ let inCombat = true;
 function gameOver() {
   if (playerHealth <= 0) {
     console.log(`********************************\n"Success is not final, failure is not fatal: it is the courage to continue that counts."
-    — Winston Churchill\n********************************`);
+    — Winston Churchill\n********************************\nGAME OVER`);
   } else {
     takeDamage();
+    console.log(
+      `********************************\nSYSTEM: DAMAGE TAKEN\nSYSTEM: STRUCTURAL INTEGRITY AT ${playerHealth}%\n********************************`
+    );
   }
 }
 
@@ -137,11 +140,13 @@ while (inCombat) {
       console.log(
         `********************************\nYOU PERFORM A RIGHT ROLL.\nBULLETS FLY PAST THE COCKPIT\nMirage : HE'S GAINING ON YOU ${pilotName} EVADE! TRY SOMETHING ELSE!\n********************************\n`
       );
+      gameOver();
       break;
     case 1:
       console.log(
         `********************************\nYOU PERFORM A LEFT ROLL.\nALARM:MISSLE WARNING,MISSLE WARNING,MISSLE WARNING\nMirage : MISSLE AIRBORN ${pilotName} EVADE! TRY SOMETHING ELSE!\n********************************\n`
       );
+      gameOver();
       break;
     case 2:
       inCombat = false;
@@ -173,7 +178,7 @@ while (inCombat) {
       );
       break;
     case 1:
-      gameOver = false;
+      inCombat = false;
       console.log(
         `********************************\nYOU HAVE MISSLE LOCK\nFOX ONE!\nTHE MISSILE FLIES OUT AND HITS THE ${enemyAircraft[0]} SHREDDING IT'S WING RIGHT OFF.\nSPASH ONE!\n********************************\n`
       );
@@ -204,8 +209,8 @@ console.log(
   `********************************\nYOU START TO LINE UP ON THE TARGETS WHEN OUT OF THE BLUE A GROUP OF ${enemyAircraft[3]}'S BUZZ EVERYONE AND ENGAGE YOUR WINGMAN\nMirage : ${pilotName} DON'T WORRY ABOUT US TAKE OUT THOSE BOMBERS BEFORE IT'S TOO LATE!\n********************************\n`
 );
 
-gameOver = true;
-while (gameOver) {
+inCombat = true;
+while (inCombat) {
   console.log('********************************');
   console.log('SELECT WEAPONS');
   options = ['FIRE VULCAN CANNON', 'FIRE 4AAM'];
@@ -219,7 +224,7 @@ while (gameOver) {
       );
       break;
     case 1:
-      gameOver = false;
+      inCombat = false;
       console.log(
         `********************************\nYOU HAVE MISSLE LOCK\nFOX THREE!\nTHE MISSILES FLY OUT AND HIT EACH ${enemyAircraft[2]} HITTING THE MUNITIONS AND SETTING THEM ABLAZE!\nSPASH FIVE!\n********************************\n`
       );
